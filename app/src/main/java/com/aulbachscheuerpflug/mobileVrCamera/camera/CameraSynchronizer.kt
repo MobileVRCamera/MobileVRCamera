@@ -56,6 +56,7 @@ class CameraSynchronizer {
             CameraDataSingleton.getInstance().activeCamera2CameraControl!!.captureRequestOptions =
                 getCaptureRequestOptions()
         }
+
         fun getCaptureRequestOptions(): CaptureRequestOptions {
             val captureRequestOptionBuilder = CaptureRequestOptions.Builder()
             for (item in CameraDataSingleton.getInstance().configMapInt!!) {

@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import com.aulbachscheuerpflug.mobileVrCamera.MAXIMUM_QUALITY_COMPRESSION
 import com.aulbachscheuerpflug.mobileVrCamera.MINIMUM_QUALITY_COMPRESSION
 import com.aulbachscheuerpflug.mobileVrCamera.MainViewModel
-import com.aulbachscheuerpflug.mobileVrCamera.Persp2Equi.Persp2Equi
+import com.aulbachscheuerpflug.mobileVrCamera.equirectangularTransformation.PerspectiveToEquirectangular
 import com.aulbachscheuerpflug.mobileVrCamera.RECEIVE_IMAGE
 import com.aulbachscheuerpflug.mobileVrCamera.TAKE_PICTURE_REQUEST
 import com.aulbachscheuerpflug.mobileVrCamera.bitmap.BitmapConverter
@@ -32,7 +32,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class CameraCapture {
-    val persp2Equi = Persp2Equi()
+    val perspectiveToEquirectangular = PerspectiveToEquirectangular()
 
     fun takePhoto(
         isHostDevice: Boolean,
@@ -42,7 +42,6 @@ class CameraCapture {
         bluetoothViewModel: BluetoothViewModel,
         mainViewModel: MainViewModel,
     ) {
-        //Send request to 2nd smartphone to start photo capture
         @androidx.camera.camera2.interop.ExperimentalCamera2Interop
         if (isHostDevice && mainViewModel.bluetoothImageCapture) {
             bluetoothViewModel.sendMessage(
@@ -63,13 +62,8 @@ class CameraCapture {
                 manualMode = mainViewModel.useManualCameraSettings,
             )
         }
-
-        // Get a stable reference of the modifiable image capture use case
-        val imageCapture = imageCapture ?: return
-
         imageCapture.targetRotation = CameraDataSingleton.getInstance().mostRecentPhotoOrientation
 
-        // Create time stamped name and MediaStore entry.
         val name = SimpleDateFormat(MobileVRCameraController.getFileFormat(), Locale.GERMANY)
             .format(System.currentTimeMillis())
 
@@ -79,7 +73,6 @@ class CameraCapture {
             put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/MobileVRCamera")
         }
 
-        // Create output options object which contains file + metadata
         val outputOptions = ImageCapture.OutputFileOptions
             .Builder(
                 contentResolver,
@@ -88,8 +81,6 @@ class CameraCapture {
             )
             .build()
 
-        // Set up image capture listener which is triggered after photo has
-        // been taken
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(context),
@@ -106,25 +97,20 @@ class CameraCapture {
             }
         )
 
-        //Set up image capture listener which is triggered after photo has been taken but not saved
         imageCapture.takePicture(
             ContextCompat.getMainExecutor(context),
             object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureSuccess(image: ImageProxy) {
-                    //save rotated bitmap of captured image
                     val bitmap = BitmapConverter.imageProxyToBitmap(image)
                     CameraDataSingleton.getInstance().mostRecentBitmap = BitmapHelper.rotateBitmap(
                         bitmap,
                         CameraDataSingleton.getInstance().mostRecentBitmapOrientation
                     )
 
-                    //case equirectangular conversion is done
                     if (mainViewModel.equirectangularTransformation) {
-                        //Create thread for conversion of perspective image to equirectangular
                         CoroutineScope(Dispatchers.Default).launch {
-                            //disable photo button as image is processing
                             mainViewModel.isTakingStereoImage = true
-                            val equirectangularBitmap = persp2Equi.persp2Equi(
+                            val equirectangularBitmap = perspectiveToEquirectangular.convertToEquirectangular(
                                 BitmapHelper.rotateBitmap(
                                     bitmap,
                                     CameraDataSingleton.getInstance().mostRecentBitmapOrientation
@@ -134,7 +120,6 @@ class CameraCapture {
                             CameraDataSingleton.getInstance().mostRecentEquirectangularBitmap =
                                 equirectangularBitmap
 
-                            //Save equirectangular bitmap as jpeg
                             withContext(Dispatchers.Main) {
                                 BitmapSaver.createAndSaveJpegFromBitmap(
                                     equirectangularBitmap,
@@ -142,12 +127,10 @@ class CameraCapture {
                                     mainViewModel,
                                     toastText = "Equi bitmap saved"
                                 )
-                                //enable photo button as image has been processed
                                 mainViewModel.isTakingStereoImage = false
 
                                 if (mainViewModel.bluetoothImageCapture) {
                                     if (!isHostDevice) {
-                                        //Sending bitmap to host
                                         bluetoothViewModel.sendMessage(
                                             RECEIVE_IMAGE,
                                             equirectangularBitmap,
@@ -161,7 +144,6 @@ class CameraCapture {
                                         )
                                     }
                                 } else {
-                                    //save bitmap for usage in mono mode
                                     if (mainViewModel.localStereoBitmapHolder == null) {
                                         mainViewModel.localStereoBitmapHolder =
                                             equirectangularBitmap
@@ -218,10 +200,6 @@ class CameraCapture {
                     if (!mainViewModel.bluetoothImageCapture || !bluetoothViewModel.state.value.isConnected) mainViewModel.isTakingStereoImage =
                         false
                     super.onCaptureSuccess(image)
-                }
-
-                override fun onError(exception: ImageCaptureException) {
-                    super.onError(exception)
                 }
             }
         )

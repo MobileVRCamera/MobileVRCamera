@@ -15,7 +15,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import com.google.common.util.concurrent.ListenableFuture
 
-
 class CameraDataSingleton private constructor() {
     lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     var cameraProvider: ProcessCameraProvider? = null
@@ -52,7 +51,6 @@ class CameraDataSingleton private constructor() {
         mutableMapOf(CaptureRequest.SENSOR_EXPOSURE_TIME to 50)
 
     companion object {
-
         @Volatile
         private var instance: CameraDataSingleton? = null
 

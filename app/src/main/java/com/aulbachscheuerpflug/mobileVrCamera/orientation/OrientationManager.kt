@@ -26,14 +26,13 @@ class OrientationManager {
 
     private fun calculateRoundedRotation(newRotationDeg: Int): Int {
         return when {
-            newRotationDeg <= 45 || newRotationDeg > 315 -> 0  // portrait
-            newRotationDeg in 46..135 -> 90  // clockwise landscape
-            newRotationDeg in 136..225 -> 180  // upside down portrait
-            else -> 270  // anticlockwise landscape
+            newRotationDeg <= 45 || newRotationDeg > 315 -> 0
+            newRotationDeg in 46..135 -> 90
+            newRotationDeg in 136..225 -> 180
+            else -> 270
         }
     }
 
-    //Source: https://stackoverflow.com/questions/14836003/get-phone-orientation-when-locked-into-one-orientation
     fun getCameraRotation(): Int {
         return when (currentRoundedRotation) {
             0 -> 90

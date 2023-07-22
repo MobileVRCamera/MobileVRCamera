@@ -1,7 +1,5 @@
 package com.aulbachscheuerpflug.mobileVrCamera.camera
 
-
-
 class MobileVRCameraController {
     var cameraCapture: CameraCapture = CameraCapture()
     var cameraSetup: CameraSetup = CameraSetup()
@@ -9,7 +7,6 @@ class MobileVRCameraController {
 
     companion object {
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val TAG = "MobileVRCameraApp"
 
         fun getFileFormat(): String {
             return FILENAME_FORMAT

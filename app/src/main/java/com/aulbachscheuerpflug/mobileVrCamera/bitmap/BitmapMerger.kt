@@ -3,12 +3,9 @@ package com.aulbachscheuerpflug.mobileVrCamera.bitmap
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import com.aulbachscheuerpflug.mobileVrCamera.MainViewModel
-import com.aulbachscheuerpflug.mobileVrCamera.camera.CameraDataSingleton
 
 class BitmapMerger {
     companion object {
-        //merges two bitmaps into 1
-        //depending on the host phone placement setting the firstBitmap will either be on the left or right
         fun createSingleImageFromTwoImages(
             firstBitmap: Bitmap,
             secondBitmap: Bitmap,

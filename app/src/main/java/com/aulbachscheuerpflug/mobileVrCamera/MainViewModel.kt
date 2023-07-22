@@ -33,9 +33,9 @@ class MainViewModel : ViewModel() {
 
     var equirectangularTransformation by mutableStateOf(true)
 
-    var deviceFov by mutableStateOf<Int>(120)
-    var antiAliasing by mutableStateOf<Int>(1)
-    var persp2EquiProgression by mutableStateOf(0)
+    var deviceFov by mutableStateOf(120)
+    var antiAliasing by mutableStateOf(1)
+    var perspectiveToEquirectangularProgression by mutableStateOf(0)
 
     var selectedDuration by mutableStateOf(Duration.ZERO)
     var countdown by mutableStateOf<Int?>(null)

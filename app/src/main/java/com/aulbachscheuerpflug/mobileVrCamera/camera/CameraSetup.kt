@@ -13,23 +13,20 @@ import androidx.camera.view.PreviewView
 import androidx.lifecycle.LifecycleOwner
 import com.aulbachscheuerpflug.mobileVrCamera.utils.showDebugError
 
-
 class CameraSetup {
     @androidx.camera.camera2.interop.ExperimentalCamera2Interop
     fun setupCamera(context: Context, lifeCycleOwner: LifecycleOwner) {
         if (CameraDataSingleton.getInstance().cameraProvider == null) {
             CameraDataSingleton.getInstance().cameraSelector =
                 CameraSelector.Builder().addCameraFilter { cameraInfos ->
-                    // filter back cameras with minimum sensor pixel size
                     val backCameras = cameraInfos.filterIsInstance<Camera2CameraInfoImpl>()
                         .filter {
                             val pixelWidth =
                                 it.cameraCharacteristicsCompat.get(CameraCharacteristics.SENSOR_INFO_PIXEL_ARRAY_SIZE)?.width
                                     ?: 0
-                            it.lensFacing == CameraSelector.LENS_FACING_BACK && pixelWidth >= 2000 // arbitrary number resolved empirically
+                            it.lensFacing == CameraSelector.LENS_FACING_BACK && pixelWidth >= 2000
                         }
 
-                    // try to find wide lens camera, if not present, default to general backCameras
                     backCameras.minByOrNull {
                         val focalLengths =
                             it.cameraCharacteristicsCompat.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)
@@ -47,7 +44,6 @@ class CameraSetup {
                 .build()
                 .also { it.setSurfaceProvider(CameraDataSingleton.getInstance().previewView!!.surfaceProvider) }
         }
-        //create camera object with assigned preview and imageCapture settings
         CameraDataSingleton.getInstance().activeCamera =
             CameraDataSingleton.getInstance().cameraSelector?.let {
                 CameraDataSingleton.getInstance().cameraProvider?.bindToLifecycle(
@@ -86,7 +82,8 @@ class CameraSetup {
             CameraDataSingleton.getInstance().activeCameraCharacteristics?.get(CameraCharacteristics.SENSOR_INFO_EXPOSURE_TIME_RANGE)
                 ?: Range(0L, 0L)
 
-        CameraDataSingleton.getInstance().activeCamera2CameraControl!!.captureRequestOptions = CameraSynchronizer.getCaptureRequestOptions()
+        CameraDataSingleton.getInstance().activeCamera2CameraControl!!.captureRequestOptions =
+            CameraSynchronizer.getCaptureRequestOptions()
 
         try {
             CameraDataSingleton.getInstance().minFocusDistance =

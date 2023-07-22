@@ -61,13 +61,13 @@ fun MainMenuScreen(
     )
     val activeProgress: Int = when {
         bluetoothState.transferProgress in 1 until 99 -> bluetoothState.transferProgress
-        mainViewModel.persp2EquiProgression in 1 until 99 -> mainViewModel.persp2EquiProgression
+        mainViewModel.perspectiveToEquirectangularProgression in 1 until 99 -> mainViewModel.perspectiveToEquirectangularProgression
         else -> 0
     }
 
     val progressText: String = when (activeProgress) {
         bluetoothState.transferProgress -> IMAGE_TRANSFER
-        mainViewModel.persp2EquiProgression -> EQUI_TRANSFER
+        mainViewModel.perspectiveToEquirectangularProgression -> EQUI_TRANSFER
         else -> ""
     }
 
