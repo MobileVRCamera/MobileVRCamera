@@ -36,8 +36,9 @@ class MainViewModel : ViewModel() {
     var deviceFov by mutableStateOf(120)
     var antiAliasing by mutableStateOf(1)
     var perspectiveToEquirectangularProgression by mutableStateOf(0)
+    var outputImageScaling by mutableStateOf(1)
 
-    var selectedDuration by mutableStateOf(Duration.ZERO)
+    var selectedDuration by mutableStateOf(Duration.Zero)
     var countdown by mutableStateOf<Int?>(null)
     var countdownJob by mutableStateOf<Job?>(null)
 

@@ -66,6 +66,7 @@ fun SettingsInfoScreen(
     val cameraUtility = CameraUtility()
     var textFieldValue by remember { mutableStateOf(mainViewModel.deviceFov.toString()) }
     var textFieldAntiAliasValue by remember { mutableStateOf(mainViewModel.antiAliasing.toString()) }
+    var textFieldImageScalingValue by remember { mutableStateOf(mainViewModel.outputImageScaling.toString()) }
     val focusManager = LocalFocusManager.current
 
     TopBar(
@@ -95,7 +96,7 @@ fun SettingsInfoScreen(
             Box(
                 modifier = Modifier.padding(top = 40.dp), contentAlignment = Alignment.CenterStart
             ) {
-                Text(text = "Timer: ", fontSize = 18.sp, color = Black)
+                Text(text = "Timer (s): ", fontSize = 18.sp, color = Black)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -261,6 +262,40 @@ fun SettingsInfoScreen(
                     ),
                     singleLine = true,
                     modifier = Modifier.padding(start = 160.dp)
+                )
+            }
+
+            DividerWithSpacing()
+
+            Row(
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column {
+                    Text(
+                        text = "Output Image-Scaling",
+                        fontSize = 18.sp,
+                        color = Black
+                    )
+                }
+                TextField(
+                    value = textFieldImageScalingValue,
+                    onValueChange = { newValue ->
+                        textFieldImageScalingValue = newValue
+                        mainViewModel.outputImageScaling =
+                            newValue.toIntOrNull() ?: mainViewModel.outputImageScaling
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Number
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = { focusManager.clearFocus() },
+                    ),
+                    singleLine = true,
+                    modifier = Modifier.padding(start = 90.dp)
                 )
             }
 

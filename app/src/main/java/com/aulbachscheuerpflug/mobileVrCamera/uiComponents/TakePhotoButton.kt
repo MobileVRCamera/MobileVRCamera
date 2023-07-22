@@ -90,12 +90,12 @@ fun TakePhotoButton(
                     if (!mainViewModel.showInfoPopUps) {
                         if (mainViewModel.countdown == null) {
                             val delaySeconds = when (mainViewModel.selectedDuration) {
-                                Duration.ZERO -> 0
-                                Duration.ONE -> 1
-                                Duration.THREE -> 3
-                                Duration.FIVE -> 5
-                                Duration.TEN -> 10
-                                Duration.FIFTEEN -> 15
+                                Duration.Zero -> 0
+                                Duration.One -> 1
+                                Duration.Three -> 3
+                                Duration.Five -> 5
+                                Duration.Ten -> 10
+                                Duration.Fifteen -> 15
                             }
 
                             if (delaySeconds > 0) {

@@ -62,7 +62,7 @@ const val GALLERY_VIEW_GUIDE_INFO_DESC = "Congratulations! You now mastered the 
 const val BLUETOOTH_SELECTION_GUIDE_DESC = "Here you can find a list of all the devices your smartphone has previously connected to. Furthermore, you can also see all the smartphones with Bluetooth enabled in your environment. To proceed, please click on the smartphone you wish to establish a connection to."
 
 enum class Duration {
-    ZERO, ONE, THREE, FIVE, TEN, FIFTEEN
+    Zero, One, Three, Five, Ten, Fifteen
 }
 
 enum class GuidedModeSteps {

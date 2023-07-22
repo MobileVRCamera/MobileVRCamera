@@ -114,7 +114,7 @@ class CameraCapture {
                                 BitmapHelper.rotateBitmap(
                                     bitmap,
                                     CameraDataSingleton.getInstance().mostRecentBitmapOrientation
-                                ), bitmap.width, mainViewModel
+                                ), mainViewModel.outputImageScaling * bitmap.width, mainViewModel
                             )
 
                             CameraDataSingleton.getInstance().mostRecentEquirectangularBitmap =
