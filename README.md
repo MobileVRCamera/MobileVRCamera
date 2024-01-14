@@ -2,8 +2,6 @@
 The Mobile VR Camera is an app for Android devices that easily allows for conversion of any pair of smartphones into a stereoscopic camera system. After connecting two phones via Bluetooth, photos can be taken by simply holding the devices in parallel towards your desired target and pressing the trigger button. The app will then create your VR-suitable image.
 Easily create VR-suitable photos and show them your friends. Never miss out on the opportunity to capture your most precious moments and relive them in Virtual Reality with the help of the Mobile VR Camera!
 
-![MobileVRCamera Poster](https://github.com/MobileVRCamera/MobileVRCamera/blob/main/MobileVRCamera%20Poster.png)
-
 # App Output Example
 ![Example Output](https://github.com/MobileVRCamera/MobileVRCamera/blob/main/ExampleOutputImage.JPG)
 
