@@ -1,0 +1,60 @@
+[33mcommit 325799e9e386e9eaa1b52a26e93aa7abc24cab71[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Felix <Felix.Scheuerpflug@gmail.com>
+Date:   Mon Aug 14 20:06:37 2023 +0200
+
+    Add GL2 Report.pdf
+
+[33mcommit 41b0e3aa3cfb6201deb7a9af0007179631d27f40[m
+Author: Felix <97892522+PhoenixFlyy@users.noreply.github.com>
+Date:   Sun Jul 23 19:03:38 2023 +0200
+
+    Update README.md
+
+[33mcommit 4e72050c68cb17619b73edf8aa9f3c3cf98de3c4[m
+Author: Felix <97892522+PhoenixFlyy@users.noreply.github.com>
+Date:   Sun Jul 23 19:03:05 2023 +0200
+
+    Update README.md
+
+[33mcommit 18df9121abe4ee34e0634bbbfde7eab94efc7b3e[m
+Author: Felix <Felix.Scheuerpflug@gmail.com>
+Date:   Sun Jul 23 18:59:56 2023 +0200
+
+    pdf to png
+
+[33mcommit 2377de172e550fafeafa2ed91d7e8a82c3da09f4[m
+Author: Felix <97892522+PhoenixFlyy@users.noreply.github.com>
+Date:   Sun Jul 23 18:56:14 2023 +0200
+
+    Update README.md
+
+[33mcommit 6f29270a4878679b44ed5da52623d7a65d8b50bd[m
+Merge: 93f46db 0775f65
+Author: Felix <Felix.Scheuerpflug@gmail.com>
+Date:   Sun Jul 23 18:51:30 2023 +0200
+
+    Merge branch 'main' of https://github.com/MobileVRCamera/MobileVRCamera
+
+[33mcommit 93f46dbd7370958c4ecaffe6e78d7b6d613bc072[m
+Author: Felix <Felix.Scheuerpflug@gmail.com>
+Date:   Sun Jul 23 18:51:23 2023 +0200
+
+    Add Trailer, Poster, Example Output Image
+
+[33mcommit 0775f6575d03832636d36d1309ecf09513e7fd8a[m
+Author: Felix <97892522+PhoenixFlyy@users.noreply.github.com>
+Date:   Sun Jul 23 18:48:47 2023 +0200
+
+    Update README.md
+
+[33mcommit 1e710a56e5bb4dde5987f560a35ba5c0f533866e[m
+Author: Felix <Felix.Scheuerpflug@gmail.com>
+Date:   Sat Jul 22 17:56:22 2023 +0200
+
+    AutoTextfield Updates
+
+[33mcommit 77bfeaecf5fedd010da6358655453386182dd93a[m[33m ([m[1;33mtag: v2[m[33m)[m
+Author: Felix <Felix.Scheuerpflug@gmail.com>
+Date:   Sat Jul 22 15:59:43 2023 +0200
+
+    Add ImageScaling
